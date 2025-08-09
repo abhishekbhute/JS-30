@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX DROPDOWN</title>
+</head>
+
+<body>
+
+    <div>
+        <h1>SEARCH HERE</h1>
+        <input type="text" id="search" class="search" placeholder="Search for city or state" />
+        <ul class="suggestions">
+            <li>Filter for a city</li>
+            <li>or a state</li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    const cities = [];
+
+    fetch(endpoint).then((res) => res.json()).then((data) => cities.push(...data))
+
+    const searchBar = document.getElementById('search')
+    searchBar.addEventListener('change', handleFilter)
+    searchBar.addEventListener('keyup', handleFilter)
+
+    function handleFilter() {
+        const searchText = this.value
+        const matched = cities.filter((place) => {
+            const regex = new RegExp(searchText, 'gi')
+            return place.city.match(regex) || place.state.match(regex)
+        })
+        console.log(matched)
+
+
+
+        const html = matched.map((city) => {
+            const regex = new RegExp(this.value, 'gi')
+            const cityName = city.city.replace(regex, `<span style="color:red">${this.value}</span>`)
+            const stateName = city.state.replace(regex, `<span style="color:red">${this.value}</span>`)
+            return `<li>
+                <span>${cityName} ${stateName}</span>
+                <span> Population: ${city.population}</span>
+            </li>`;
+        }).join('')
+
+        const suggestions = document.querySelector('.suggestions')
+        console.log(html)
+        suggestions.innerHTML = html
+    }
+</script>
+
+</html>

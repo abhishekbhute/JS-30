@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Checkbox</title>
+</head>
+<style>
+    .options {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .item {
+        display: flex;
+        border: 1px solid black;
+        background-color: gainsboro;
+        width: 20%;
+    }
+</style>
+
+<body>
+
+    <div class="options">
+        <div class="item">
+            <input type="checkbox" id="option" data-index="1" />
+            <p>Option 1</p>
+        </div>
+        <div class="item">
+            <input type="checkbox" id="option" data-index="2" />
+            <p>Option 2</p>
+        </div>
+        <div class="item">
+            <input type="checkbox" id="option" data-index="3" />
+            <p>Option 3</p>
+        </div>
+        <div class="item">
+            <input type="checkbox" id="option" data-index="4" />
+            <p>Option 4</p>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    const checkboxes = document.querySelectorAll('#option')
+    let lastChecked;
+
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('click', handleClick);
+    })
+
+
+    function handleClick(e) {
+        let inBetween = false;
+        checkboxes.forEach((checkbox) => {
+            if (e.shiftKey && this.checked) {
+
+                if (checkbox === this || checkbox === lastChecked) {
+                    inBetween = !inBetween
+                    console.log(this)
+                }
+
+                if (inBetween) {
+                    checkbox.checked = true;
+                }
+
+            }
+        })
+        lastChecked = this;
+    }
+
+</script>
+
+</html>

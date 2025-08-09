@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>FLEX PANELS</title>
+</head>
+
+<body>
+    <div class="panels">
+        <div class="panel panel1">
+            <p>Experience</p>
+            <p>It</p>
+            <p>Today</p>
+        </div>
+        <div class="panel panel2">
+            <p>Experience</p>
+            <p>It</p>
+            <p>Today</p>
+        </div>
+        <div class="panel panel3">
+            <p>Experience</p>
+            <p>It</p>
+            <p>Today</p>
+        </div>
+        <div class="panel panel4">
+            <p>Experience</p>
+            <p>It</p>
+            <p>Today</p>
+        </div>
+        <div class="panel panel5">
+            <p>Experience</p>
+            <p>It</p>
+            <p>Today</p>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    const panels = document.querySelectorAll('.panel')
+    panels.forEach((panel) => {
+        panel.addEventListener('click', () => handleMouseEnter(panel))
+    })
+
+
+    function handleMouseEnter(panel) {
+        panel.classList.toggle('open-active')
+        panel.classList.toggle('open')
+    }
+
+    // function handleMouseLeave(panel) {
+    //     panel.classList.remove('open-active')
+    //     panel.classList.remove('open')
+    // }
+</script>
+
+</html>
